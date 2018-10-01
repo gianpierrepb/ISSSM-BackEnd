@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISSMDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tarea" EntityType="ISSMDBModel.Tarea" />
+    <EntitySet Name="Usuario" EntityType="ISSMDBModel.Usuario" />
+    <AssociationSet Name="FK__Tarea__UsuarioID__25869641" Association="ISSMDBModel.FK__Tarea__UsuarioID__25869641">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Tarea" EntitySet="Tarea" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tarea">
+    <Key>
+      <PropertyRef Name="TareaID" />
+    </Key>
+    <Property Name="TareaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UsuarioID" Type="Int32" />
+    <Property Name="Detalle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="ISSMDBModel.FK__Tarea__UsuarioID__25869641" FromRole="Tarea" ToRole="Usuario" />
+    <Property Name="Estado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Genero" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Distrito" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tarea" Relationship="ISSMDBModel.FK__Tarea__UsuarioID__25869641" FromRole="Usuario" ToRole="Tarea" />
+  </EntityType>
+  <Association Name="FK__Tarea__UsuarioID__25869641">
+    <End Type="ISSMDBModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="ISSMDBModel.Tarea" Role="Tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
