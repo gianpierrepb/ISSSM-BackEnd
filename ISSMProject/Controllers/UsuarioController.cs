@@ -24,7 +24,7 @@ namespace ISSMProject.Controllers
         [HttpGet]
         public string GetTareas(string correo)
         {
-            ISSMTarea task = new ISSMTarea();
+            ISSMTarea task;
             string json;
                
             var usuario = context.Usuario.Where(x => x.Correo == correo).FirstOrDefault();
@@ -37,6 +37,7 @@ namespace ISSMProject.Controllers
                 {
                     foreach (var tarea in tareas)
                     {
+                        task = new ISSMTarea();
                         task.usuarioid = usuario.UsuarioID;
                         task.Detalle = tarea.Detalle;
                         task.Estado = Convert.ToInt32(tarea.Estado);
